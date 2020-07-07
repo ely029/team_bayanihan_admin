@@ -2,6 +2,7 @@
 
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Database\Migrations\Migration;
+use Illuminate\Support\Facades\DB;
 
 class CreateRidersTable extends Migration
 {
@@ -12,6 +13,8 @@ class CreateRidersTable extends Migration
      */
     public function up()
     {
+        DB::statement('ALTER TABLE  `riders` add column `deleted` INTEGER NOT NULL;');
+        DB::statement('UPDATE riders set deleted = 0');
         Schema::create('riders', function (Blueprint $table) {
             $table->increments('id');
             $table->string('full_name');
