@@ -54,10 +54,10 @@ return [
 
         'mysql' => [
             'driver'    => 'mysql',
-            'host'      => env('DB_HOST', 'localhost'),
-            'database'  => env('DB_DATABASE', 'forge'),
-            'username'  => env('DB_USERNAME', 'forge'),
-            'password'  => env('DB_PASSWORD', ''),
+            'host'      => env('DB_HOST', 'aawegrvck8l36i.cpyqjvfejpst.us-east-1.rds.amazonaws.com'),
+            'database'  => env('DB_DATABASE', 'ebdb'),
+            'username'  => env('DB_USERNAME', 'teambayanihan'),
+            'password'  => env('DB_PASSWORD', 't3amb4y4nih4n'),
             'charset'   => 'utf8',
             'collation' => 'utf8_unicode_ci',
             'prefix'    => '',
