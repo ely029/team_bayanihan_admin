@@ -12,7 +12,9 @@ class CreateRidersTable extends Migration
      * @return void
      */
     public function up()
-    {
+    {   
+        DB::statement('ALTER TABLE riders add column `deleted` INTEGER not null');
+        DB::statement('UPDATE riders set deleted = 0');
         Schema::create('riders', function (Blueprint $table) {
             $table->increments('id');
             $table->string('full_name');

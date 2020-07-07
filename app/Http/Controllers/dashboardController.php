@@ -28,7 +28,7 @@ class dashboardController extends Controller
      */
     public function riders()
     {
-    	$results = DB::select( DB::raw("SELECT * FROM riders") );
+    	$results = DB::select( DB::raw("SELECT * FROM riders where deleted <> 1") );
         return view('riders_list',['data' => $results]);
     }
 
@@ -58,6 +58,16 @@ class dashboardController extends Controller
     	 	vehicle_model='$vehicle_model',
     	 	license_number='$license_number'
     	 	where id = $id ") );
+        return response('true');
+    }
+
+    public function deleteRider(Request $request)
+    {
+        $id = $request->request->get('id');
+    
+         DB::select( DB::raw("UPDATE riders set 
+            deleted = 1
+            where id = $id ") );
         return response('true');
     }
 

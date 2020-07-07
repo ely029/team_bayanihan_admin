@@ -16,3 +16,4 @@ Route::get('/dashboard', 'dashboardController@index');
 Route::get('/riders/list', 'dashboardController@riders');
 Route::post('/add/rider', 'dashboardController@addRider');
 Route::post('/update/rider', 'dashboardController@updateRider');
+Route::post('/delete/rider', 'dashboardController@deleteRider');

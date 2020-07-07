@@ -25,7 +25,7 @@
                     </a>
                 </li>
                 <li>
-                    <a href="#"></i>RIDER LIST</a>
+                    <a href="{{url('riders/list')}}"></i>RIDER LIST</a>
                 </li>
                 <li>
                     <a href="#">CURRENT TRIPS</a>

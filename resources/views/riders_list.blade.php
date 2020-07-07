@@ -29,7 +29,7 @@
                     </a>
                 </li>
                 <li>
-                    <a href="" class="active"></i>RIDER LIST</a>
+                    <a href="{{ url('/riders/list')}}" class="active"></i>RIDER LIST</a>
                 </li>
                 <li>
                     <a href="#">CURRENT TRIPS</a>
@@ -100,7 +100,7 @@
                                     <li><a href="#"><i class="fa fa-plus" style="margin-left:10px;"></i>Add Credits</a></li>
                                     <li><a href="#" data-toggle="modal" data-target="#modal_update_{{ $datas->id }}"><i class="fa fa-pencil" style="margin-left:10px;"></i>Edit</a></li>
                                     <li role="separator" class="divider"></li>
-                                    <li><b><a href="#" style="color:red;"><i class="fa fa-trash-o"></i>Delete Registration</a></b></li>
+                                    <li><b><a href="#" class="delete-registration-{{ $datas->id }}" style="color:red;"><i class="fa fa-trash-o"></i>Delete Registration</a></b></li>
                                   </ul>
                          </div>
                     </td>
@@ -149,16 +149,16 @@
       </div>
       <div class="modal-body">
         <span>Full Name</span>
-        <input type="text" id="full_name" value="{{ $datas->full_name }}"  class="form-control">
+        <input type="text" class="full_name-{{ $datas->id }}" value="{{ $datas->full_name }}"  class="form-control">
         <span>Email</span>
-        <input type="text"  id="email" value="{{ $datas->email }}" style="margin-top:20px;" class="form-control">
+        <input type="text"  class="email-{{ $datas->id }}" value="{{ $datas->email }}" style="margin-top:20px;" class="form-control">
         <span>Full Name</span>
-        <input type="text" id="vehicle_model" style="margin-top:20px;" value="{{ $datas->vehicle_model }}" class="form-control">
+        <input type="text" class="vehicle_model-{{ $datas->id }}" style="margin-top:20px;" value="{{ $datas->vehicle_model }}" class="form-control">
         <span>License Number</span>
-        <input id="license_number" type="text" style="margin-top:20px;" value="{{ $datas->license_number}}" class="form-control">
+        <input class="license_number-{{ $datas->id }}" type="text" style="margin-top:20px;" value="{{ $datas->license_number}}" class="form-control">
       </div>
       <div class="modal-footer">
-        <button type="button" id="update-rider-{{ $datas->id }}" class="btn btn-primary">Update Rider</button>
+        <button type="button" class="update-rider-{{ $datas->id }}" class="btn btn-primary">Update Rider</button>
       </div>
     </div>
   </div>
@@ -182,21 +182,48 @@
     <script type="text/javascript">
            $('document').ready(function(){
                   
-                  $('#update-rider-{{ $datas->id }}').click(function(){
+                  $('.update-rider-{{ $datas->id }}').click(function(){
 
                      $.ajax({
                   type: "POST",
                   url: "{{ url('update/rider')}}",
                   data: {
                       id: {{ $datas->id }},
-                      full_name: $('#full_name').val(),
-                      email: $('#email').val(),
-                      vehicle_model: $('#vehicle_model').val(),
-                      license_number: $('#license_number').val(),
+                      full_name: $('.full_name-{{ $datas->id }}').val(),
+                      email: $('.email-{{ $datas->id }}').val(),
+                      vehicle_model: $('.vehicle_model-{{ $datas->id }}').val(),
+                      license_number: $('.license_number-{{ $datas->id }}').val(),
                       _token: '{{ csrf_token() }}'
                   },
                   success: function(result) {
                     alert('you had updated the rider successfully');
+                    location.reload();
+                  },
+                  error: function(result) {
+
+                     alert('there is an error');
+                  }
+                 });
+           });
+    });
+    </script>
+    @endforeach
+
+    @foreach($data as $datas)
+    <script type="text/javascript">
+           $('document').ready(function(){
+                  
+                  $('.delete-registration-{{ $datas->id }}').click(function(){
+
+                     $.ajax({
+                  type: "POST",
+                  url: "{{ url('delete/rider')}}",
+                  data: {
+                      id: {{ $datas->id }},
+                      _token: '{{ csrf_token() }}'
+                  },
+                  success: function(result) {
+                    alert('You already delete the registration');
                     location.reload();
                   },
                   error: function(result) {
